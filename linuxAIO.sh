@@ -1,172 +1,146 @@
 #!/bin/sh
-echo ""
 echo "Welcome to NadekoBot."
 
-choice=8
-	echo "1. Download Dev Build (Latest)"
-	echo "2. Download Stable Build"
-	echo "3. Run Nadeko (Normally)"
-	echo "4. Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
-	echo "5. Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
-	echo "6. Set up credentials.json (If you have downloaded NadekoBot already.)"
-	echo "7. To Exit"
-	echo -n "Choose [1 or 2] to Download, [3 or 4] to Run, or [7] to Exit"
-while [ $choice -eq 8 ]; do
-read choice
-if [ $choice -eq 1 ] ; then
-
+while true
+do
+	# Menu options
+	echo "====================="
+	echo "DreamBot Menu Options"
+	echo "====================="
+	echo "1: Download Dev Build (Latest)"
+	echo "2: Download Stable Build"
+	echo "3: Run Nadeko (Normally)"
+	echo "4: Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
+	echo "5: Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
+	echo "6: Set up credentials.json (If you have downloaded NadekoBot already.)"
+	echo "7: Exit"
+	echo "---------------------"
+	echo -n "Choose menu option: "
+	read choice
 	echo ""
-	echo "Downloading NadekoBot, please wait."
-	curl -L https://github.com/Kwoth/NadekoBot-BashScript/raw/master/nadeko_installer_latest.sh | sh
-	echo ""
-	echo "NadekoBot Dev Build (Latest) downloaded."
-	bash linuxAIO.sh
-else
-	if [ $choice -eq 2 ] ; then
-		echo ""
-		echo "Downloading NadekoBot, please wait."
-		curl -L https://github.com/Kwoth/NadekoBot-BashScript/raw/master/nadeko_installer.sh | sh
-		echo ""
-		echo "NadekoBot Stable Build downloaded."
-		bash linuxAIO.sh
-	else
-		if [ $choice -eq 3 ] ; then
-			echo ""
+	
+	case $choice in
+		1)
+			echo "Downloading NadekoBot latest build, please wait."
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer_latest.sh | sh
+			echo "NadekoBot Latest Build downloaded."
+			;;
+		2)
+			echo "Downloading NadekoBot stable build, please wait."
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | sh
+			echo "NadekoBot Stable Build downloaded."
+			;;
+		3)
 			echo "Running Nadeko Normally, if you are running this to check Nadeko, use .die command on discord to stop Nadeko."
-			curl -L https://github.com/Kwoth/NadekoBot-BashScript/raw/master/nadeko_run.sh | sh
-			echo ""
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_run.sh | sh
 			echo "Welcome back to NadekoBot."
-			bash linuxAIO.sh
-		else
-			if [ $choice -eq 4 ] ; then
-				echo ""
-				echo "Running Nadeko with Auto Restart you will have to close the session to stop the auto restart."
-				sleep 5s
-				wget -N https://github.com/Kwoth/NadekoBot-BashScript/raw/master/NadekoAutoRestartAndUpdate.sh && bash NadekoAutoRestartAndUpdate.sh
-				echo ""
-				echo "That did not work?"
-				bash linuxAIO.sh
-			else
-				if [ $choice -eq 5 ] ; then
-					echo ""
-					echo "Getting the Auto-Installer for Debian/Ubuntu"
-					wget -N https://github.com/Kwoth/NadekoBot-BashScript/raw/master/nadekoautoinstaller.sh && bash nadekoautoinstaller.sh
-					echo ""
-					echo "Welcome back..."
-					bash linuxAIO.sh
-				else
-					if [ $choice -eq 6 ] ; then
+			;;
+		4)
+			echo "Running Nadeko with Auto Restart you will have to close the session to stop the auto restart."
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/NadekoAutoRestartAndUpdate.sh | sh
+			echo "Welcome back to NadekoBot."
+			;;
+		5)
+			echo "Getting the Auto-Installer for Debian/Ubuntu"
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadekoautoinstaller.sh | sh
+			echo "Welcome back..."
+			;;
+		6)
+			echo "Okay, let's begin creating a new credentials.json file."
+			echo "Please read JSON Explanations in the guide..."
+			while true
+			do
+				echo -n "Are you ready to continue? (Y/N): "
+				read yn
+				case $yn in
+					[Yy])
+						rm -f "NadekoBot/src/NadekoBot/credentials.json.old"
+						mv "NadekoBot/src/NadekoBot/credentials.json" "NadekoBot/src/NadekoBot/credentials.json.old"
+
+						echo -n "Please enter your bot client ID: "
+						read clientid
+						echo "Alright saved \'$clientid\' as your client ID."
 						echo ""
-						echo
-echo -e "Let's begin creating a new credentials.json file if you are about to run the NadekoBot for the first time. \n \nPlease read JSON Explanations in the guide... \n \nPress [Y] when you are ready to continue or [N] to exit."
-while true; do
-    read -p "[y/n]: " yn
-    case $yn in
-        [Yy]* ) clear; break;;
-        [Nn]* ) echo Exiting...; exit;;
-        * ) echo "Couldn't get that please type [y] for Yes or [n] for No.";;
-    esac
+
+						echo -n "Please enter your bot ID \(should be same as your client ID\): "
+						read botid
+						echo "Alright saved \'$botid\' as your Bot ID."
+						echo ""
+
+						echo -n "Please enter your bot token \(It is not bot secret, it should be ~59 characters long.\): "
+						read token
+						echo "Alright saved \'$token\' as your bot\'s token."
+						echo ""
+
+						echo -n "Please enter your own ID \(Refer to the guide, it will be bot\'s owner ID.\): "
+						read ownerid
+						echo "Alright saved \'$ownerid\' as owner\'s ID."
+						echo ""
+
+						echo -n "Please enter Google API key \(Refer to the guide.\): "
+						read googleapi
+						echo "Alright saved \'$googleapi\' as your bot\'s Google API Key."
+						echo ""
+
+						echo -n "Please enter LoL API Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\): "
+						read lolapikey
+						echo "Alright saved \'$lolapikey\'"
+						echo ""
+
+						echo -n "Please enter Mashape Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\): "
+						read mashapekey
+						echo "Alright saved \'$mashapekey\'"
+						echo ""
+
+						echo -n "Please enter Osu API Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\): "
+						read osu
+						echo "Alright saved \'$osu\'"
+						echo ""
+
+						echo -n "Please enter SoundCloud Client Id or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\): "
+						read scid
+						echo "Alright saved \'$scid\'"
+						echo ""
+
+						echo "Resulting credentials.json file"
+						echo "==============================="
+						(
+							echo "{"
+							echo "\"ClientId\": $clientid,"
+							echo "\"BotId\": $botid,"
+							echo "\"Token\": \"$token\","
+							echo "\"OwnerIds\": ["
+							echo "\t$ownerid"
+							echo "],"
+							echo "\"LoLApiKey\": \"$lolapikey\","
+							echo "\"GoogleApiKey\": \"$googleapi\","
+							echo "\"MashapeKey\": \"$mashapekey\","
+							echo "\"OsuApiKey\": \"$osu\","
+							echo "\"SoundCloudClientId\": \"$scid\","
+							echo "\"Db\": null,"
+							echo "\"TotalShards\": 1"
+							echo "}"
+						) | tee NadekoBot/src/NadekoBot/credentials.json
+						echo "-------------------------------"
+						echo "Saved to: NadekoBot/src/NadekoBot/credentials.json"
+						echo "Credentials setup completed."
+						;;
+					[Nn])
+						echo "Cancelled."
+						break
+						;;
+					*)
+						echo "Please answer \"Y\" or \"N\""
+						;;
+				esac
+			done
+		7)
+			echo "Exiting."
+			break
+			;;
+		*)
+			echo "Invalid menu option"
+			;;
+	esac
+	echo ""
 done
-clear
-cd NadekoBot/src/NadekoBot
-mv credentials.json credentials.json.old
-
-echo Please enter your bot client ID:
-read clientid
-echo Alright saved \'$clientid\' as your client ID.
-sleep 2
-clear
-
-echo Please enter your bot ID \(should be same as your client ID\):
-read botid
-echo Alright saved \'$botid\' as your Bot ID.
-sleep 2
-clear
-
-echo Please enter your bot token \(It is not bot secret, it should be ~59 characters long.\):
-read token
-echo Alright saved \'$token\' as your bot\'s token.
-sleep 2
-clear
-
-echo Please enter your own ID \(Refer to the guide, it will be bot\'s owner ID.\):
-read ownerid
-echo Alright saved \'$ownerid\' as owner\'s ID.
-sleep 2
-clear
-
-echo Please enter Google API key \(Refer to the guide.\):
-read googleapi
-echo Alright saved \'$googleapi\' as your bot\'s Google API Key.
-sleep 2
-clear
-
-echo Please enter LoL API Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\):
-read lolapikey
-echo Alright saved \'$lolapikey\'
-sleep 2
-clear
-
-echo Please enter Mashape Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\):
-read mashapekey
-echo Alright saved \'$mashapekey\'
-sleep 2
-clear
-
-echo Please enter Osu API Key or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\):
-read osu
-echo Alright saved \'$osu\'
-sleep 2
-clear
-
-echo Please enter SoundCloud Client Id or Just Press [Enter Key] to skip. \(optional\) \(Refer to the JSON Explanations guide.\):
-read scid
-echo Alright saved \'$scid\'
-sleep 2
-clear
-
-echo "{
-  \"ClientId\": $clientid,
-  \"BotId\": $botid,
-  \"Token\": \"$token\",
-  \"OwnerIds\": [
-    $ownerid
-  ],
-  \"LoLApiKey\": \"$lolapikey\",
-  \"GoogleApiKey\": \"$googleapi\",
-  \"MashapeKey\": \"$mashapekey\",
-  \"OsuApiKey\": \"$osu\",
-  \"SoundCloudClientId\": \"$scid\",
-  \"Db\": null,
-  \"TotalShards\": 1
-}" | cat - >> credentials.json
-echo Credentials setup completed.
-sleep 5
-clear
-cd -
-bash linuxAIO.sh
-					else
-						if [ $choice -eq 7 ] ; then
-							echo ""
-							echo "Exiting..."
-							exit 0
-						else
-							clear
-							echo "1. Download Dev Build (Latest)"
-							echo "2. Download Stable Build"
-							echo "3. Run Nadeko (Normally)"
-							echo "4. Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
-							echo "5. Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
-							echo "6. Set up credentials.json (If you have downloaded NadekoBot already.)"
-							echo "7. To Exit"
-							echo -n "Choose [1 or 2] to Download, [3 or 4] to Run, or [7] to Exit."
-							choice=8
-						fi
-					fi
-				fi
-			fi
-		fi
-	fi
-fi
-done
-exit 0
