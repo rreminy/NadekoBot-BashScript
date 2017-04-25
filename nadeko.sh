@@ -2,8 +2,10 @@
 nadeko_run()
 {
 	echo "Running NadekoBot..."
+	cd NadekoBot/src/NadekoBot
 	dotnet run --configuration Release
 	echo "Done"
+	cd -
 }
 
 nadeko_installer()
