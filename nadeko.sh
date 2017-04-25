@@ -1,19 +1,19 @@
 #!/bin/sh
-function nadeko_run()
+nadeko_run()
 {
 	echo "Running NadekoBot..."
 	dotnet run --configuration Release
 	echo "Done"
 }
 
-function nadeko_installer()
+nadeko_installer()
 {
 	echo "Downloading NadekoBot $1 branch..."
 	wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh && chmod 755 nadeko_installer.sh && ./nadeko_installer.sh $1
 	echo "Done"
 }
 
-function nadeko_autorestart
+nadeko_autorestart()
 {
 	while :
 	do
