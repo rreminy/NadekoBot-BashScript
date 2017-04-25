@@ -11,7 +11,7 @@ nadeko_run()
 nadeko_installer()
 {
 	echo "Downloading NadekoBot $1 branch..."
-	wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh && chmod 755 nadeko_installer.sh && ./nadeko_installer.sh $1
+	rm -f ./nadeko_installer.sh && wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh && chmod 755 nadeko_installer.sh && ./nadeko_installer.sh $1
 	echo "Done"
 }
 
@@ -36,7 +36,7 @@ nadeko_autorestart()
 					then
 						nadeko_installer dev
 					fi
-					run
+					nadeko_run
 					echo "Sleeping 5 seconds..."
 					sleep 5
 				done
@@ -54,7 +54,7 @@ nadeko_autorestart()
 nadeko_prerequisites()
 {
 	echo "Downloading NadekoBot prerequisites..."
-	wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_prerequisites.sh && chmod 755 nadeko_prerequisites.sh && ./nadeko_prerequisites.sh $1
+	rm -f ./nadeko_prerequisites.sh wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_prerequisites.sh && chmod 755 nadeko_prerequisites.sh && ./nadeko_prerequisites.sh
 	echo "Done"
 }
 
