@@ -9,8 +9,13 @@ else
 fi
 
 cd NadekoBot/src/NadekoBot
-echo "Running NadekoBot with auto restart Please wait."
-while :; do dotnet run -c Release; sleep 5s; done
+while (true)
+do
+	echo "Running NadekoBot with auto restart."
+	dotnet run -c Release;
+	echo "Sleeping 5 seconds..."
+	sleep 5s;
+done
 echo "Done"
 
 exit 0

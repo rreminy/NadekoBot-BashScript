@@ -1,24 +1,18 @@
 #!/bin/sh
-echo ""
 echo "NadekoBot Installer started."
 
 if hash git 1>/dev/null 2>&1
 then
-    echo ""
     echo "Git Installed."
 else
-    echo ""    
     echo "Git is not installed. Please install Git."
     exit 1
 fi
 
-
 if hash dotnet 1>/dev/null 2>&1
 then
-    echo ""
     echo "Dotnet installed."
 else
-    echo ""
     echo "Dotnet is not installed. Please install dotnet."
     exit 1
 fi
@@ -32,7 +26,7 @@ cd "$tempdir"
 
 echo ""
 echo "Downloading NadekoBot, please wait."
-git clone -b master --recursive --depth 1 https://github.com/Kwoth/NadekoBot.git
+git clone -b $BRANCH --recursive --depth 1 https://github.com/rreminy/NadekoBot.git
 echo ""
 echo "NadekoBot downloaded."
 
@@ -48,15 +42,14 @@ cd $root/$tempdir/NadekoBot/Discord.Net/src/Discord.Net.Commands/
 dotnet restore 1>/dev/null 2>&1
 cd $root/$tempdir/NadekoBot/src/NadekoBot/
 dotnet restore 1>/dev/null 2>&1
-echo ""
 echo "Download done"
-
 echo ""
+
 echo "Building NadekoBot"
 cd $root/$tempdir/NadekoBot/src/NadekoBot/
 dotnet build --configuration Release 1>/dev/null 2>&1
-echo ""
 echo "Building done. Moving Nadeko"
+echo ""
 
 cd "$root"
 

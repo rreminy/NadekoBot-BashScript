@@ -8,12 +8,11 @@ do
 	echo "DreamBot Menu Options"
 	echo "====================="
 	echo "1: Download Dev Build (Latest)"
-	echo "2: Download Stable Build"
-	echo "3: Run Nadeko (Normally)"
-	echo "4: Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
-	echo "5: Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
-	echo "6: Set up credentials.json (If you have downloaded NadekoBot already.)"
-	echo "7: Exit"
+	echo "2: Run Nadeko (Normally)"
+	echo "3: Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
+	echo "4: Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
+	echo "5: Set up credentials.json (If you have downloaded NadekoBot already.)"
+	echo "6: Exit"
 	echo "---------------------"
 	echo -n "Choose menu option: "
 	read choice
@@ -21,31 +20,27 @@ do
 	
 	case $choice in
 		1)
-			echo "Downloading NadekoBot latest build, please wait."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer_latest.sh | sh
+			echo "Downloading NadekoBot, please wait."
+			export BRANCH=dev
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | sh
 			echo "NadekoBot Latest Build downloaded."
 			;;
 		2)
-			echo "Downloading NadekoBot stable build, please wait."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | sh
-			echo "NadekoBot Stable Build downloaded."
-			;;
-		3)
 			echo "Running Nadeko Normally, if you are running this to check Nadeko, use .die command on discord to stop Nadeko."
 			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_run.sh | sh
 			echo "Welcome back to NadekoBot."
 			;;
-		4)
+		3)
 			echo "Running Nadeko with Auto Restart you will have to close the session to stop the auto restart."
 			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/NadekoAutoRestartAndUpdate.sh | sh
 			echo "Welcome back to NadekoBot."
 			;;
-		5)
+		4)
 			echo "Getting the Auto-Installer for Debian/Ubuntu"
 			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadekoautoinstaller.sh | sh
 			echo "Welcome back..."
 			;;
-		6)
+		5)
 			echo "Okay, let's begin creating a new credentials.json file."
 			echo "Please read JSON Explanations in the guide..."
 			while true
@@ -106,19 +101,19 @@ do
 						echo "==============================="
 						(
 							echo "{"
-							echo "\"ClientId\": $clientid,"
-							echo "\"BotId\": $botid,"
-							echo "\"Token\": \"$token\","
-							echo "\"OwnerIds\": ["
-							echo "\t$ownerid"
-							echo "],"
-							echo "\"LoLApiKey\": \"$lolapikey\","
-							echo "\"GoogleApiKey\": \"$googleapi\","
-							echo "\"MashapeKey\": \"$mashapekey\","
-							echo "\"OsuApiKey\": \"$osu\","
-							echo "\"SoundCloudClientId\": \"$scid\","
-							echo "\"Db\": null,"
-							echo "\"TotalShards\": 1"
+							echo "  \"ClientId\": $clientid,"
+							echo "  \"BotId\": $botid,"
+							echo "  \"Token\": \"$token\","
+							echo "  \"OwnerIds\": ["
+							echo "    $ownerid"
+							echo "  ],"
+							echo "  \"LoLApiKey\": \"$lolapikey\","
+							echo "  \"GoogleApiKey\": \"$googleapi\","
+							echo "  \"MashapeKey\": \"$mashapekey\","
+							echo "  \"OsuApiKey\": \"$osu\","
+							echo "  \"SoundCloudClientId\": \"$scid\","
+							echo "  \"Db\": null,"
+							echo "  \"TotalShards\": 1"
 							echo "}"
 						) | tee NadekoBot/src/NadekoBot/credentials.json
 						echo "-------------------------------"
@@ -134,7 +129,7 @@ do
 						;;
 				esac
 			done
-		7)
+		6)
 			echo "Exiting."
 			break
 			;;
