@@ -129,6 +129,7 @@ do
 						;;
 				esac
 			done
+			;;
 		[6xX])
 			echo "Exiting."
 			break
