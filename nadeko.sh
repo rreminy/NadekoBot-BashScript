@@ -1,4 +1,62 @@
 #!/bin/sh
+function nadeko_run()
+{
+	echo "Running NadekoBot..."
+	dotnet run --configuration Release
+	echo "Done"
+}
+
+function nadeko_installer()
+{
+	echo "Downloading NadekoBot $1 branch..."
+	wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh && chmod 755 nadeko_installer.sh && ./nadeko_installer.sh $1
+	echo "Done"
+}
+
+function nadeko_autorestart
+{
+	while :
+	do
+		echo "Nadeko with Auto Restart"
+		echo "========================"
+		echo "1. Auto Restart only"
+		echo "2. Auto Restart and Update"
+		echo "3. Exit"
+		echo "------------------------"
+		echo -n "Choose menu option: "
+		read choice
+
+		case $choice in
+			[12])
+				while :
+				do
+					if [ $choice -eq 2 ]
+					then
+						nadeko_installer dev
+					fi
+					run
+					echo "Sleeping 5 seconds..."
+					sleep 5
+				done
+				;;
+			[3xX])
+				echo "Returning to main menu"
+				break
+				;;
+			*)
+				;;
+		esac
+	done
+}
+
+nadeko_prerequisites()
+{
+	echo "Downloading NadekoBot prerequisites..."
+	wget https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_prerequisites.sh && chmod 755 nadeko_prerequisites.sh && ./nadeko_prerequisites.sh $1
+	echo "Done"
+}
+
+
 echo "Welcome to NadekoBot."
 
 while :
@@ -7,7 +65,7 @@ do
 	echo "====================="
 	echo "DreamBot Menu Options"
 	echo "====================="
-	echo "1: Download Dev Build (Latest)"
+	echo "1: Download & Install / Update NadekoBot"
 	echo "2: Run Nadeko (Normally)"
 	echo "3: Run Nadeko with Auto Restart (Run Nadeko normally before using this.)"
 	echo "4: Auto-Install Prerequisites (For Ubuntu, Debian and CentOS)"
@@ -20,25 +78,16 @@ do
 	
 	case $choice in
 		1)
-			echo "Downloading NadekoBot, please wait."
-			export BRANCH=dev
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | /bin/sh
-			echo "NadekoBot downloaded."
+			nadeko_installer dev
 			;;
 		2)
-			echo "Running Nadeko Normally, if you are running this to check Nadeko, use .die command on discord to stop Nadeko."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_run.sh | /bin/sh
-			echo "Welcome back to NadekoBot."
+			nadeko_run
 			;;
 		3)
-			echo "Running Nadeko with Auto Restart you will have to close the session to stop the auto restart."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_autorun.sh | /bin/sh
-			echo "Welcome back to NadekoBot."
+			nadeko_autorestart
 			;;
 		4)
-			echo "Getting the Auto-Installer for Debian/Ubuntu"
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_prerequisites.sh | /bin/bash -e
-			echo "Welcome back..."
+			nadeko_prerequisites
 			;;
 		5)
 			echo "Okay, let's begin creating a new credentials.json file."
