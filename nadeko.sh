@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Welcome to NadekoBot."
 
-while true
+while :
 do
 	# Menu options
 	echo "====================="
@@ -22,28 +22,28 @@ do
 		1)
 			echo "Downloading NadekoBot, please wait."
 			export BRANCH=dev
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | sh
-			echo "NadekoBot Latest Build downloaded."
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_installer.sh | /bin/sh
+			echo "NadekoBot downloaded."
 			;;
 		2)
 			echo "Running Nadeko Normally, if you are running this to check Nadeko, use .die command on discord to stop Nadeko."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_run.sh | sh
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_run.sh | /bin/sh
 			echo "Welcome back to NadekoBot."
 			;;
 		3)
 			echo "Running Nadeko with Auto Restart you will have to close the session to stop the auto restart."
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/NadekoAutoRestartAndUpdate.sh | sh
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_autorun.sh | /bin/sh
 			echo "Welcome back to NadekoBot."
 			;;
 		4)
 			echo "Getting the Auto-Installer for Debian/Ubuntu"
-			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadekoautoinstaller.sh | sh
+			curl -L https://github.com/rreminy/NadekoBot-BashScript/raw/master/nadeko_prerequisites.sh | /bin/bash -e
 			echo "Welcome back..."
 			;;
 		5)
 			echo "Okay, let's begin creating a new credentials.json file."
 			echo "Please read JSON Explanations in the guide..."
-			while true
+			while :
 			do
 				echo -n "Are you ready to continue? (Y/N): "
 				read yn
@@ -129,7 +129,7 @@ do
 						;;
 				esac
 			done
-		6)
+		[6xX])
 			echo "Exiting."
 			break
 			;;
@@ -139,3 +139,5 @@ do
 	esac
 	echo ""
 done
+
+exit 0
