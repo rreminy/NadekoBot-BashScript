@@ -67,4 +67,5 @@ fi
 rm -r "$tempdir"
 echo ""
 echo "Installation Complete."
+sleep 5
 exit 0
