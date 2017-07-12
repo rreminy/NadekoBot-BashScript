@@ -34,7 +34,7 @@ nadeko_autorestart()
 				do
 					if [ $choice -eq 2 ]
 					then
-						nadeko_installer dev
+						nadeko_installer 1.4
 					fi
 					nadeko_run
 					echo "Sleeping 5 seconds..."
@@ -80,7 +80,7 @@ do
 	
 	case $choice in
 		1)
-			nadeko_installer dev
+			nadeko_installer 1.4
 			;;
 		2)
 			nadeko_run
