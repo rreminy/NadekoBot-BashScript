@@ -56,20 +56,13 @@ else
     echo "credentials.json copied to the new version"
     cp -RT $root/NadekoBot_old/src/NadekoBot/bin/ $root/NadekoBot/src/NadekoBot/bin/ 1>/dev/null 2>&1
     cp -RT "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.0/data/NadekoBot.db" "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.1/data/NadekoBot.db" 1> /dev/null 2>&1
-    mv -f "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.0/data/NadekoBot.db" "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.0/data/NadekoBot_old.db" 1> dev/null 2>&1
+    mv -f "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.0/data/NadekoBot.db" "$root/NadekoBot/src/NadekoBot/bin/Release/netcoreapp1.0/data/NadekoBot_old.db" 1> /dev/null 2>&1
     echo ""
     echo "Database copied to the new version"
     cp -RT $root/NadekoBot_old/src/NadekoBot/data/ $root/NadekoBot/src/NadekoBot/data/ 1>/dev/null 2>&1
     echo ""
     echo "Other data copied to the new version"
 fi
-
-echo "Building NadekoBot"
-cd "$root/NadekoBot"
-dotnet restore
-dotnet build --configuration Release
-cd "$root/NadekoBot/src/NadekoBot"
-echo "Building done."
 
 rm -r "$tempdir"
 echo ""
