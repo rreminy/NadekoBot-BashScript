@@ -1,4 +1,6 @@
 #!/bin/sh
+root=$(pwd)
+
 nadeko_run()
 {
 	cd "$root/NadekoBot"
