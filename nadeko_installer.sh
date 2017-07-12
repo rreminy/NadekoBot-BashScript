@@ -26,20 +26,24 @@ cd "$tempdir"
 
 echo "Downloading NadekoBot, please wait."
 git clone -b $1 --recursive --depth 1 https://github.com/rreminy/NadekoBot.git
-echo ""
 echo "NadekoBot downloaded."
-
 echo ""
+
 echo "Downloading Nadeko dependencies"
 cd $root/$tempdir/NadekoBot
 dotnet restore
 echo "Download done"
 echo ""
 
+echo "Updating Youtube-DL"
+youtube-dl -U
+echo "Done."
+echo ""
+
 echo "Building NadekoBot"
 cd $root/$tempdir/NadekoBot
 dotnet build --configuration Release 1>/dev/null 2>&1
-echo "Building done. Moving Nadeko"
+echo "Building done. Moving Nadeko."
 echo ""
 
 cd "$root"

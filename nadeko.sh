@@ -1,6 +1,10 @@
 #!/bin/sh
 nadeko_run()
 {
+	cd "$root/NadekoBot"
+	dotnet restore
+	dotnet build --configuration Release
+	
 	echo "Running NadekoBot..."
 	cd NadekoBot/src/NadekoBot
 	dotnet run --configuration Release
