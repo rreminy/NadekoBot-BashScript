@@ -8,7 +8,7 @@ nadeko_run()
 	dotnet build --configuration Release
 	
 	echo "Running NadekoBot..."
-	cd NadekoBot/src/NadekoBot
+	cd "$root/NadekoBot/src/NadekoBot"
 	dotnet run --configuration Release
 	echo "Done"
 	cd -
