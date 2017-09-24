@@ -1,5 +1,6 @@
 #!/bin/sh
 root=$(pwd)
+branch=1.9
 
 nadeko_run()
 {
@@ -40,7 +41,7 @@ nadeko_autorestart()
 				do
 					if [ $choice -eq 2 ]
 					then
-						nadeko_installer 1.4
+						nadeko_installer $branch
 					fi
 					nadeko_run
 					echo "Sleeping 5 seconds..."
@@ -86,7 +87,7 @@ do
 	
 	case $choice in
 		1)
-			nadeko_installer 1.4
+			nadeko_installer $branch
 			;;
 		2)
 			nadeko_run
