@@ -24,7 +24,7 @@ rm -r "$tempdir" 1>/dev/null 2>&1
 mkdir "$tempdir"
 cd "$tempdir"
 
-echo "Downloading NadekoBot, please wait."
+echo "Downloading NadekoBot branch $1, please wait."
 git clone -b $1 --recursive --depth 1 https://github.com/Kwoth/NadekoBot.git
 echo "NadekoBot downloaded."
 echo ""
